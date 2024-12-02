@@ -16,12 +16,12 @@ const TabIcons =({icon, color, name, focused}: {icon: string, color: string, nam
     )
 }
 
-const tabsLayout = () => {
+const TabsLayout = () => {
   return (
  <Tabs
     screenOptions={{
         tabBarShowLabel: true,
-        tabBarActiveTintColor: 'navyblue',
+        tabBarActiveTintColor: 'red',
         tabBarInactiveTintColor: 'grey',
     }}
 >
@@ -59,4 +59,4 @@ const tabsLayout = () => {
   )
 }
 
-export default tabsLayout
+export default TabsLayout

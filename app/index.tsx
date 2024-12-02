@@ -2,6 +2,8 @@ import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
+import Getstart from './getstart';
+
 
 const App = () => {
   return (
@@ -9,9 +11,7 @@ const App = () => {
       <SafeAreaView style={styles.SafeArea}>
         <ScrollView style={styles.ScrollView}>
           <View style={styles.view1}>
-            <Text style={styles.text}>
-              Homeksauhdawjdwe asekfaeukfaskjfas fsaufaskfb amsdakwfgaweyfes fsefaweskufb sec sdfseuc bsak fc
-            </Text>
+            <Getstart />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -21,7 +21,7 @@ const App = () => {
 
 const styles = StyleSheet.create({
   SafeArea: {
-    backgroundColor: 'black',
+    backgroundColor: 'white',
     height: '100%',
   },
   ScrollView: {
