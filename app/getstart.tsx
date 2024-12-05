@@ -53,7 +53,7 @@ const GetStart = () => {
                     style={{ width: 300, height: 300 }}
                 />
                 <View style={styles.container2}>
-                    {/* Animated Heading Text with Selective Styling */}
+                    
                     <Text style={styles.headingText}>
                         {animatedText.split(" ").map((word, index) => (
                             <Text

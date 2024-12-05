@@ -17,6 +17,7 @@ const TabIcons =({icon, color, name, focused}: {icon: string, color: string, nam
 }
 
 const TabsLayout = () => {
+
   return (
  <Tabs
     screenOptions={{
