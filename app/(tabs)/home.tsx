@@ -1,21 +1,58 @@
-import { View, Text, StyleSheet, Dimensions, FlatList } from 'react-native'
-import React from 'react'
-import ListCard from '../components/ListCard'
+import { View, StyleSheet, Dimensions, FlatList, ActivityIndicator } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import ListCard from '../components/ListCard';
+import getDataService from '../services/getDataservice';
 
-const home = () => {
+const Home = () => {
   const { height } = Dimensions.get('window');
-  const data = [{ key: '1' }];
+  const [stations, setStations] = useState<Array<{ id: number, latitude: number, longitude: number, state?: { name: string } }>>([]);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const fetchStations = async () => {
+    try {
+      const response = await getDataService.getListOfData();
+      const first25Stations = response.slice(0, 25);
+      setStations(first25Stations);
+    } catch (error) {
+      console.error('Error fetching stations:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStations(); 
+  }, []);
+
+  
+  const handleRefresh = async () => {
+    setRefreshing(true); 
+    await fetchStations(); 
+    setRefreshing(false); 
+  };
+
   return (
     <View style={[styles.mainView, { height }]}>
-      <FlatList
-        data={data}
-        renderItem={({ item }) => <ListCard />}
-        keyExtractor={item => item.key}
-        contentContainerStyle={styles.contentContainer} // Center the content
-      />
+      {stations.length > 0 ? (
+        <FlatList
+          data={stations}
+          renderItem={({ item }) => (
+            <ListCard
+              id={item.id}
+              latitude={item.latitude}
+              longitude={item.longitude}
+              // stateName={item.state?.name}
+            />
+          )}
+          keyExtractor={(item) => item.id.toString()}
+          contentContainerStyle={styles.contentContainer}
+          refreshing={refreshing} // Add refreshing state
+          onRefresh={handleRefresh} // Trigger refresh on pull-down
+        />
+      ) : (
+        <ActivityIndicator size="large" color="#0000ff" /> // Show loading spinner while data loads
+      )}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   mainView: {
@@ -24,10 +61,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   contentContainer: {
-    flexGrow: 1, // Ensures the container takes the full height
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
 });
 
-export default home;
+export default Home;
