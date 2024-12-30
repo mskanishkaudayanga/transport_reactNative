@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import getDataService from '../services/getDataservice';
 import { Image } from 'react-native';
-
+import { useCounter } from '@/contexts/counterContext';
 interface StationData {
     id: number;
     name?: string;
@@ -22,8 +22,9 @@ interface PropData {
 
 function ListCard(props: PropData) {
     const [stationData, setStationData] = useState<StationData | null>(null);
-
+ const {incrementCount} = useCounter();
     useEffect(() => {
+
         const fetchStation = async () => {
             try {
                 const response = await getDataService.getDataById(props.id.toString());
@@ -91,7 +92,7 @@ function ListCard(props: PropData) {
                         <Text style={styles.value}>{stationData?.city || 'N/A'}</Text>
                     </View>
 
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity onPress={incrementCount} style={styles.button}>
                         <Text style={styles.buttonText}>View Details</Text>
                     </TouchableOpacity>
                 </View>

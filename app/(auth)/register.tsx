@@ -83,7 +83,7 @@ const Register = () => {
             Register
           </Animated.Text>
           <LottieView
-            source={require('../../assets/animations/Animation - 1733233655359.json')}
+            source={require('../../assets/animations/Animation - 1735583680832.json')}
             autoPlay
             loop
             style={{ width: 300, height: 300 }}

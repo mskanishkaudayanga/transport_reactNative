@@ -1,9 +1,11 @@
-import { View, StyleSheet, Dimensions, FlatList, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, Dimensions, FlatList, ActivityIndicator, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import ListCard from '../components/ListCard';
 import getDataService from '../services/getDataservice';
-
+import FloatingCounter from '../components/FlotingCounter';
+import { useCounter } from '@/contexts/counterContext';
 const Home = () => {
+  const{count} = useCounter();
   const { height } = Dimensions.get('window');
   const [stations, setStations] = useState<Array<{ id: number, latitude: number, longitude: number, state?: { name: string } }>>([]);
   const [refreshing, setRefreshing] = useState(false);
@@ -31,6 +33,7 @@ const Home = () => {
 
   return (
     <View style={[styles.mainView, { height }]}>
+     <FloatingCounter count={count} />
       {stations.length > 0 ? (
         <FlatList
           data={stations}
@@ -50,6 +53,7 @@ const Home = () => {
       ) : (
         <ActivityIndicator size="large" color="#0000ff" /> // Show loading spinner while data loads
       )}
+      
     </View>
   );
 };

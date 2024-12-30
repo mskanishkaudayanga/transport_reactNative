@@ -3,11 +3,13 @@ import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 import Getstart from './getstart';
+import { CounterProvider } from '@/contexts/counterContext';
 
 
 const App = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <CounterProvider>
       <SafeAreaView style={styles.SafeArea}>
         <ScrollView style={styles.ScrollView}>
           <View style={styles.view1}>
@@ -15,6 +17,7 @@ const App = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
+      </CounterProvider>
     </GestureHandlerRootView>
   );
 };
